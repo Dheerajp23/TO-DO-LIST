@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <link rel="stylesheet" href="./src/styles.css">
+  <title>To Do List</title>
+
+</head>
+
+<body>
+ <div class="container">
+ <header>
+  <h1>TO DO LIST</h1>
+ </header>
+ <main class="flex">
+  <aside>
+    <input type="text" id="task" placeholder="Add a task">
+    <button class="buttonTask" onclick="addTask()"> Add Task</button>
+  </aside>
+  <section>
+    <h2>List Items</h2>
+    <ul class="todo"> 
+
+    </ul>
+  </section>
+ </main>
+ </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+
+
+
+  <script>
+     const task = document.getElementById('task');
+     const localStorageTasks = JSON.parse(localStorage.getItem('tasks'));
+     console.log(localStorageTasks);
+     window.onload = function(){
+       if(localStorageTasks){
+         document.querySelector('.todo').innerHTML += `<li>${localStorageTasks} <i class="fas fa-trash" onclick="deleteTask(this)"></i></li>`;
+       }
+     }
+     
+     
+      function addTask(){
+      if(task.value === ''){
+        alert('Please add a task');
+        return;
+      }
+      document.querySelector('.todo').innerHTML += `<li>${task.value} <i class="fas fa-trash" onclick="deleteTask(this)"></i></li>`;
+      localStorage.setItem('tasks', JSON.stringify(task.value));
+      task.value = '';
+      task.focus();
+    }
+    function deleteTask(e){
+      if(confirm('Are you sure you want to delete this task?'))
+      e.parentElement.remove();
+      localStorage.removeItem('tasks', e.parentElement.innerText);
+    }
+  </script>
+</body>
+
+</html>
