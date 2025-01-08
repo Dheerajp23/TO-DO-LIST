@@ -132,8 +132,11 @@ ul li{
     .inputForm{
         margin-bottom: 1rem;
     }
-    .flex{
+    .container .flex{
         flex-direction: column;
+    }
+    .todo-items .flex{
+        flex-direction: row;
     }
     .buttonTask {
         position: static;
